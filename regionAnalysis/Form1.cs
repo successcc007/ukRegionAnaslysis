@@ -13,6 +13,7 @@ namespace regionAnalysis
     public partial class Form1 : Form
     {
         private string openFileName = null;
+        private string saveFileName = null;
         public Form1()
         {
             InitializeComponent();
@@ -48,8 +49,8 @@ namespace regionAnalysis
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 string foldPath = dialog.SelectedPath;
-                LableSaveFileName = foldPath;
-                labAll.Text = foldPath;
+                LableSaveFileName.Text = foldPath;
+                saveFileName = foldPath;
             }
         }
     }

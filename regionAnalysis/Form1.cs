@@ -34,7 +34,7 @@ namespace regionAnalysis
                 string file = fileDialog.FileName;
                 LableOpenFileName.Text = file;
                 openFileName = file;
-
+                OperateExcel.Read(file);
             }
         }
         /// <summary>
@@ -46,13 +46,17 @@ namespace regionAnalysis
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.Description = "请选择文件路径";
+            string name = @"\123.xlsx";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                string foldPath = dialog.SelectedPath;
+                string foldPath = dialog.SelectedPath+name;
                 LableSaveFileName.Text = foldPath;
                 saveFileName = foldPath;
+                OperateExcel.Write(foldPath);
             }
         }
+
+
 
 
     }

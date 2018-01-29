@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace regionAnalysis
 {
+    
     class Company
     {
         /// <summary>
@@ -16,6 +17,9 @@ namespace regionAnalysis
         /// 年代和人数字典，key：year，value：num
         /// </summary>
         Dictionary<string, int> NumOfEmployees = new Dictionary<string, int>();
+        //List<CityInfo> CityInfoList = new List<CityInfo>();
+        //Dictionary<string, List<CityInfo>> provinceAndCityDict = new Dictionary<string, List<CityInfo>>();
+        //Dictionary<string, Dictionary<string, List<CityInfo>>> RegionDict = new Dictionary<string, Dictionary<string, List<CityInfo>>>();      
 
         public Company(string name)
         {
@@ -40,22 +44,22 @@ namespace regionAnalysis
             return num;
         }
         /// <summary>
-        /// 增加该年代员工数
+        /// 设置该年代员工数
         /// </summary>
         /// <param name="year"></param>
         /// <param name="num"></param>
-        public void SetEmployeesNum(string year ,int num)
+        public void SetEmployeesNum(string year, int num)
         {
             if (NumOfEmployees.Keys.Contains(year))
             {
-                int n = NumOfEmployees[year]+num;
+                int n = NumOfEmployees[year] + num;
                 NumOfEmployees[year] = n;
             }
             else
             {
                 NumOfEmployees.Add(year, num);
             }
-        }
+        }     
 
     }
 }

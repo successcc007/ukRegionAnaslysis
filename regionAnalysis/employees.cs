@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace regionAnalysis
 {
-  
+    class CityInfo
+    {
+        public string province;
+        public string name;
+    }
     class Employees
     {
         /// <summary>
@@ -20,7 +24,7 @@ namespace regionAnalysis
         /// <summary>
         /// 工作年份
         /// </summary>
-        int workYear = 0;
+        string workYear = null;
         /// <summary>
         /// 所属省份
         /// </summary>
@@ -29,7 +33,7 @@ namespace regionAnalysis
         /// 所属市
         /// </summary>
         string city = null;
-        public Employees(string companyName,int year,string name)
+        public Employees(string companyName, string year, string name)
         {
             this.company = companyName;
             this.workYear = year;
@@ -50,7 +54,7 @@ namespace regionAnalysis
             set { this.company = value; }
             get { return company; }
         }
-        public int WorkYear
+        public string WorkYear
         {
             set { this.workYear = value; }
             get { return workYear; }

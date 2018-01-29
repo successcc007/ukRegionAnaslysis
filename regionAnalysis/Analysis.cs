@@ -22,18 +22,20 @@ namespace regionAnalysis
             int colNum = excel.CellCount;
             for (int i = 1; i < rowNum; i++)
             {
-                var name = excel.Read(i, 0);
+                var companyName = excel.Read(i, 0);
                 var year = excel.Read(i, 1);
-
-                if (companyDict.Keys.Contains(name))
+                var employees = excel.Read(i, 2);
+                var province = excel.Read(i, 3);
+                var city = excel.Read(i, 4);
+                if (companyDict.Keys.Contains(companyName))
                 {                   
-                    companyDict[name].SetEmployeesNum(year, 1);
+                    companyDict[companyName].SetEmployeesNum(year, 1);
                 }
                 else
                 {
-                    Company com = new Company(name);
+                    Company com = new Company(companyName);
                     com.SetEmployeesNum(year, 1);
-                    companyDict.Add(name, com);
+                    companyDict.Add(companyName, com);
                 }
 
 

@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace regionAnalysis
 {
-    class CityInfo
-    {
-        public string province;
-        public string name;
-    }
+    
     class Employees
     {
         /// <summary>

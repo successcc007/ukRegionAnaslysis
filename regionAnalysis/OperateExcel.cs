@@ -44,7 +44,7 @@ namespace regionAnalysis
         public string Read(int rowNum, int columnNum)
         {
             Cells cells = sht.Cells;
-            string v = cells[rowNum, columnNum].Value.ToString();
+            string v = cells[rowNum, columnNum]?.Value?.ToString();
             return v;
         }
     }
@@ -61,12 +61,18 @@ namespace regionAnalysis
     public class WriteExcel
     {
         Workbook wk;
+        Worksheet sheet;
         public WriteExcel()
         {         
             wk = new Workbook();
             License l = new License();
             var filePath = AppDomain.CurrentDomain.BaseDirectory;
             l.SetLicense(filePath+"/License.lic");
+            wk.Worksheets.Add(SheetType.Worksheet);
+        }
+        public void SetPageNum(int pageNum )
+        {            
+            sheet = wk.Worksheets[pageNum];
         }
         /// <summary>
         /// 写入第几行几列单元格内容
@@ -75,9 +81,9 @@ namespace regionAnalysis
         /// <param name="columnNum"></param>
         /// <param name="value"></param>
         /// <param name="pageNum"></param>
-        public void Write(int rowNum, int columnNum, string value, int pageNum = 0)
+        public void Write(int rowNum, int columnNum, string value)
         {
-            Worksheet sheet = wk.Worksheets[pageNum];
+            
             Cells cells = sheet.Cells;
             cells[rowNum, columnNum].PutValue(value);
         }

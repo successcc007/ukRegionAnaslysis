@@ -20,7 +20,8 @@ namespace regionAnalysis
         /// <summary>
         /// 年代和省市人数字典
         /// </summary>
-        Dictionary<string, Dictionary<string, ProvinceInfo>> YearProvince = new Dictionary<string, Dictionary<string, ProvinceInfo>>();        
+        Dictionary<string, Dictionary<string, ProvinceInfo>> YearProvince = new Dictionary<string, Dictionary<string, ProvinceInfo>>();
+        Dictionary<string, List<Ceo>> CeoDict = new Dictionary<string, List<Ceo>>();
 
         public Company(string name)
         {
@@ -61,7 +62,47 @@ namespace regionAnalysis
                 NumOfEmployees.Add(year, num);
             }
         }
-
+        /// <summary>
+        /// 添加seo
+        /// </summary>
+        /// <param name="pro"></param>
+        /// <param name="city"></param>
+        /// <param name="year"></param>
+        /// <param name="num"></param>
+        public void SetCeoInfo(string pro, string city, string year,string name)
+        {
+            if (CeoDict.Keys.Contains(year))
+            {
+                Ceo s = new Ceo();
+                s.year = year;
+                s.province = pro;
+                s.city = city;
+                CeoDict[year].Add(s);
+            }
+            else
+            {
+                Ceo s = new Ceo();
+                s.year = year;
+                s.province = pro;
+                s.city = city;
+                List<Ceo> sl = new List<Ceo>();
+                sl.Add(s);
+                CeoDict.Add(year, sl);
+            }
+        }
+        /// <summary>
+        /// 获取当年seo列表
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        public List<Ceo> GetCeoList(string year)
+        {
+            if (CeoDict.Keys.Contains(year))
+            {
+                return CeoDict[year];
+            }
+            return null;
+        }
         /// <summary>
         /// 设置年代、省、市人数
         /// </summary>
@@ -149,9 +190,9 @@ namespace regionAnalysis
         /// </summary>
         /// <param name="pro"></param>
         /// <returns></returns>
-        public List<string> GetCityList(string year,string pro)
+        public List<string> GetCityList(string year, string pro)
         {
-            var cl= YearProvince[year][pro].cityList;
+            var cl = YearProvince[year][pro].cityList;
             List<string> cnameL = new List<string>();
             foreach (var i in cl)
             {
@@ -173,9 +214,9 @@ namespace regionAnalysis
         /// <param name="pro"></param>
         /// <param name="year"></param>
         /// <returns></returns>
-        public int GetProvinceEmployeesNum(string pro,string year)
+        public int GetProvinceEmployeesNum(string pro, string year)
         {
-            return YearProvince[year]?[pro]?.num??0;            
+            return YearProvince[year]?[pro]?.num ?? 0;
         }
         /// <summary>
         /// 取某年某省某市总人数
@@ -184,7 +225,7 @@ namespace regionAnalysis
         /// <param name="city"></param>
         /// <param name="year"></param>
         /// <returns></returns>
-        public int GetCityEmployeesNum(string pro,string city,string year)
+        public int GetCityEmployeesNum(string pro, string city, string year)
         {
             foreach (var c in YearProvince[year]?[pro]?.cityList)
             {
@@ -207,6 +248,13 @@ namespace regionAnalysis
     {
         public string name;
         public int num;
+    }
+    public class Ceo
+    {
+        public string name;
+        public string year;
+        public string province;
+        public string city;
     }
 
 
